@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
+import AddMovieForm from './AddMovieForm.jsx'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-const initialForm = { title: '', director: '', year: '', review: '', rating: '' };
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [form, setForm] = useState(initialForm);
   const [savingId, setSavingId] = useState('');
   const [filter, setFilter] = useState('all');
   const [showStats, setShowStats] = useState(false);
@@ -45,25 +44,15 @@ function App() {
     loadMovies();
   }, [loadMovies]);
 
-  async function handleCreate(event) {
-    event.preventDefault();
-    if (!form.title.trim() || !form.director.trim() || !form.year) {
-      setError('Please fill title, director, and year.');
-      return;
-    }
+  async function createMovie(formData) {
+    setError('');
     setSavingId('new');
     try {
-      const body = {
-        ...form,
-        year: Number(form.year),
-        watched: false,
-      };
       const created = await request('/api/movies', {
         method: 'POST',
-        body: JSON.stringify(body),
+        body: JSON.stringify({ ...formData, watched: false }),
       });
       setMovies((prev) => [created, ...prev]);
-      setForm(initialForm);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -158,64 +147,7 @@ function App() {
             {error && <span className="error">{error}</span>}
           </div>
 
-          <form className="stack" onSubmit={handleCreate}>
-            <div className="field-grid">
-              <label className="field">
-                <span>Title</span>
-                <input
-                  type="text"
-                  value={form.title}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                  placeholder="Past Lives"
-                />
-              </label>
-              <label className="field">
-                <span>Director</span>
-                <input
-                  type="text"
-                  value={form.director}
-                  onChange={(e) =>
-                    setForm({ ...form, director: e.target.value })
-                  }
-                  placeholder="Celine Song"
-                />
-              </label>
-              <label className="field">
-                <span>Year</span>
-                <input
-                  type="number"
-                  value={form.year}
-                  min="1888"
-                  onChange={(e) => setForm({ ...form, year: e.target.value })}
-                  placeholder="2023"
-                />
-              </label>
-              <label className="field">
-                <span>Rating (0-10)</span>
-                <input
-                  type="number"
-                  value={form.rating}
-                  min="0"
-                  max="10"
-                  step="0.5"
-                  onChange={(e) => setForm({ ...form, rating: e.target.value })}
-                  placeholder="8.5"
-                />
-              </label>
-            </div>
-            <label className="field">
-              <span>Quick review or note</span>
-              <textarea
-                rows="3"
-                value={form.review}
-                onChange={(e) => setForm({ ...form, review: e.target.value })}
-                placeholder="What should reviewers focus on?"
-              />
-            </label>
-            <button className="primary" type="submit" disabled={!!savingId}>
-              {savingId === 'new' ? 'Saving…' : 'Add to backlog'}
-            </button>
-          </form>
+          <AddMovieForm onCreate={createMovie} savingId={savingId} />
         </section>
 
         <section className="panel">
