@@ -122,7 +122,7 @@ function App() {
             <button className="ghost" onClick={loadMovies} disabled={loading}>
               {loading ? 'Refreshing…' : 'Refresh data'}
             </button>
-            <button className="primary" onClick={() => setShowStats(!showStats)}>
+            <button className="stats-btn" onClick={() => setShowStats(!showStats)}>
               📊 {showStats ? 'Hide Stats' : 'Show Stats'}
             </button>
           </div>
