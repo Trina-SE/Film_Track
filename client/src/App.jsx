@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
@@ -11,10 +11,6 @@ function App() {
   const [form, setForm] = useState(initialForm);
   const [savingId, setSavingId] = useState('');
   const [filter, setFilter] = useState('all');
-
-  useEffect(() => {
-    loadMovies();
-  }, []);
 
   async function request(path, options = {}) {
     setError('');
@@ -32,7 +28,7 @@ function App() {
     return res.json();
   }
 
-  async function loadMovies() {
+  const loadMovies = useCallback(async () => {
     setLoading(true);
     try {
       const data = await request('/api/movies');
@@ -42,7 +38,11 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    loadMovies();
+  }, [loadMovies]);
 
   async function handleCreate(event) {
     event.preventDefault();
