@@ -11,6 +11,7 @@ function App() {
   const [form, setForm] = useState(initialForm);
   const [savingId, setSavingId] = useState('');
   const [filter, setFilter] = useState('all');
+  const [showStats, setShowStats] = useState(false);
 
   async function request(path, options = {}) {
     setError('');
@@ -121,9 +122,37 @@ function App() {
             <button className="ghost" onClick={loadMovies} disabled={loading}>
               {loading ? 'Refreshing…' : 'Refresh data'}
             </button>
+            <button className="stats-btn" onClick={() => setShowStats(!showStats)}>
+              📊 {showStats ? 'Hide Stats' : 'Show Stats'}
+            </button>
           </div>
         </div>
       </header>
+
+      {showStats && (
+        <section className="stats-section">
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-number">{movies.length}</div>
+              <div className="stat-label">Total Movies</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">{movies.filter(m => m.watched).length}</div>
+              <div className="stat-label">Watched</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">{movies.filter(m => !m.watched).length}</div>
+              <div className="stat-label">In Backlog</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-number">
+                {movies.length > 0 ? (movies.filter(m => m.rating).reduce((sum, m) => sum + (m.rating || 0), 0) / movies.filter(m => m.rating).length).toFixed(1) : '0.0'}
+              </div>
+              <div className="stat-label">Avg Rating</div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <main className="layout">
         <section className="panel">
