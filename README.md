@@ -15,7 +15,6 @@ A modern movie tracking application built with MERN stack, featuring comprehensi
 - **Total Movies**: Count of all movies in collection
 - **Watched Count**: Number of movies you've watched
 - **Backlog Count**: Movies waiting to be watched
-- **Average Rating**: Overall rating across all rated movies
 
 ## 🛠 Tech Stack
 

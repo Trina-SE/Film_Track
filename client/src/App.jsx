@@ -144,12 +144,6 @@ function App() {
               <div className="stat-number">{movies.filter(m => !m.watched).length}</div>
               <div className="stat-label">In Backlog</div>
             </div>
-            <div className="stat-card">
-              <div className="stat-number">
-                {movies.length > 0 ? (movies.filter(m => m.rating).reduce((sum, m) => sum + (m.rating || 0), 0) / movies.filter(m => m.rating).length).toFixed(1) : '0.0'}
-              </div>
-              <div className="stat-label">Avg Rating</div>
-            </div>
           </div>
         </section>
       )}
