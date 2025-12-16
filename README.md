@@ -202,6 +202,8 @@ This project is licensed under the ISC License.
 
 ## 👥 Authors
 
-- **Trina-SE** - Initial work and MCR implementation
+- **Trina-SE** 
+- **Mostafizur Rahaman** 
+- **Fareya Azam** - Initial work and MCR implementation
 
 ---
