@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-const initialForm = { title: '', director: '', year: '', review: '' };
+const initialForm = { title: '', director: '', year: '', review: '', rating: '' };
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -167,6 +167,18 @@ function App() {
                   placeholder="2023"
                 />
               </label>
+              <label className="field">
+                <span>Rating (0-10)</span>
+                <input
+                  type="number"
+                  value={form.rating}
+                  min="0"
+                  max="10"
+                  step="0.5"
+                  onChange={(e) => setForm({ ...form, rating: e.target.value })}
+                  placeholder="8.5"
+                />
+              </label>
             </div>
             <label className="field">
               <span>Quick review or note</span>
@@ -225,8 +237,9 @@ function App() {
                 </div>
                 {movie.review && (
                   <p className="review">“{movie.review.trim()}”</p>
-                )}
-                <div className="actions">
+                )}                {movie.rating && (
+                  <p className="rating">⭐ Rating: {movie.rating}/10</p>
+                )}                <div className="actions">
                   <button
                     type="button"
                     className="ghost"
