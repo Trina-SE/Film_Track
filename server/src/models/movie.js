@@ -7,6 +7,7 @@ const movieSchema = new mongoose.Schema(
     year: { type: Number, required: true, min: 1888 },
     watched: { type: Boolean, default: false },
     review: { type: String, trim: true },
+    rating: { type: Number, min: 0, max: 10 },
   },
   { timestamps: true }
 );
