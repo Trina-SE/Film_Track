@@ -3,7 +3,6 @@ import './App.css';
 import AddMovieForm from './AddMovieForm.jsx'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-const initialForm = { title: '', director: '', year: '', review: '', rating: '' };
 
 function App() {
   const [movies, setMovies] = useState([]);
