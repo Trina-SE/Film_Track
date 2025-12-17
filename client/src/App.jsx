@@ -117,11 +117,8 @@ function App() {
           </div>
         </div>
       </header>
-     //new comment added for testing conflict
-     /*
-
-
-     new comment added for testing conflict     */
+      {/* //Added
+      // console.error('Server failed!', err); */}
       {showStats && (
         <section className="stats-section">
           <div className="stats-grid">
