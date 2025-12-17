@@ -128,7 +128,7 @@ function App() {
           </div>
         </div>
       </header>
-
+      {/* //Added */}
       {showStats && (
         <section className="stats-section">
           <div className="stats-grid">
