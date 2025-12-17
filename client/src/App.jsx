@@ -117,7 +117,7 @@ function App() {
           </div>
         </div>
       </header>
-     //new comment added for testing conflict
+      {/* //Added */}
       {showStats && (
         <section className="stats-section">
           <div className="stats-grid">
