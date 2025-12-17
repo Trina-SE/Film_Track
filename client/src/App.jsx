@@ -128,7 +128,8 @@ function App() {
           </div>
         </div>
       </header>
-      {/* //Added */}
+      {/* //Added
+      // console.error('Server failed!', err); */}
       {showStats && (
         <section className="stats-section">
           <div className="stats-grid">
