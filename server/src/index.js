@@ -33,7 +33,7 @@ async function start() {
     });
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error('Failed to start server', err);
+    console.error('Server failed', err);
     process.exit(1);
   }
 }
