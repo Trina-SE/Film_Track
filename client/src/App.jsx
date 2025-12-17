@@ -104,7 +104,7 @@ function App() {
           <p className="eyebrow">FilmTrack</p>
           <h1>A simple movie tracker</h1>
           <p className="lede">
-            Track movies you love, add quick reviews, and easily mark movies as watched or in your backlog
+            Track movies you love, add quick reviews, and easily mark movies as watched or in your backlog!
           </p>
           <div className="hero-actions">
             {/*<span className="badge">Enjoy your Time</span>*/}
